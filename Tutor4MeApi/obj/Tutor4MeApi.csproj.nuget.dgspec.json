@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bbdnet2576\\Desktop\\Grad Programme\\Level Ups\\CSharp Java Fundamentals\\Tutor4Me\\Tutor4MeApi\\Tutor4MeApi.csproj": {}
+    "C:\\Users\\nkosp001\\Documents\\Grad Programme\\C#\\Tutor4Me\\Tutor4MeApi\\Tutor4MeApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bbdnet2576\\Desktop\\Grad Programme\\Level Ups\\CSharp Java Fundamentals\\Tutor4Me\\Tutor4MeApi\\Tutor4MeApi.csproj": {
+    "C:\\Users\\nkosp001\\Documents\\Grad Programme\\C#\\Tutor4Me\\Tutor4MeApi\\Tutor4MeApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bbdnet2576\\Desktop\\Grad Programme\\Level Ups\\CSharp Java Fundamentals\\Tutor4Me\\Tutor4MeApi\\Tutor4MeApi.csproj",
+        "projectUniqueName": "C:\\Users\\nkosp001\\Documents\\Grad Programme\\C#\\Tutor4Me\\Tutor4MeApi\\Tutor4MeApi.csproj",
         "projectName": "Tutor4MeApi",
-        "projectPath": "C:\\Users\\bbdnet2576\\Desktop\\Grad Programme\\Level Ups\\CSharp Java Fundamentals\\Tutor4Me\\Tutor4MeApi\\Tutor4MeApi.csproj",
-        "packagesPath": "C:\\Users\\bbdnet2576\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bbdnet2576\\Desktop\\Grad Programme\\Level Ups\\CSharp Java Fundamentals\\Tutor4Me\\Tutor4MeApi\\obj\\",
+        "projectPath": "C:\\Users\\nkosp001\\Documents\\Grad Programme\\C#\\Tutor4Me\\Tutor4MeApi\\Tutor4MeApi.csproj",
+        "packagesPath": "C:\\Users\\nkosp001\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nkosp001\\Documents\\Grad Programme\\C#\\Tutor4Me\\Tutor4MeApi\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\bbdnet2576\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\nkosp001\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,10 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://artifactory.acturis.com/artifactory/api/nuget/v3/yellow-ui-nuget-approved-prod": {},
-          "https://artifactory.acturis.com/artifactory/api/nuget/v3/yellow-ui-nuget-stable-prod": {},
-          "https://artifactory.acturis.com/artifactory/api/nuget/yellow-ui-nuget-approved-internal": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -84,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
