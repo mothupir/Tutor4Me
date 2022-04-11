@@ -14,11 +14,7 @@ namespace Tutor4MeApi.Models
             ModuleId = moduleId;
         }
 
-        [NotMapped]
-        public Tutor Tutor { get; set; }
         public int TutorId { get; set; }
-        [NotMapped]
-        public Module Module { get; set; }
         public int ModuleId { get; set; }
     }
 }

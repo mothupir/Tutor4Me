@@ -19,8 +19,6 @@ namespace Tutor4MeApi.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RatingId { get; set; }
-        [NotMapped]
-        public Tutor Tutor { get; set; }
         [Required]
         public int TutorId { get; set; }
         [Required]
