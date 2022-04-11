@@ -6,6 +6,6 @@ namespace Tutor4MeApi.Data
     {
         int CreateModule(Module module);
         int DeleteModule(int moduleId);
-        int GetAllModules();
+        List<Module> GetAllModules();
     }
 }

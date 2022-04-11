@@ -14,7 +14,7 @@ builder.Services.AddDbContext<DataContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("Tutor4MeDB")));
 
 builder.Services.AddScoped<IAccountService, AccountService>();
-
+builder.Services.AddScoped<IModuleService, ModuleService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

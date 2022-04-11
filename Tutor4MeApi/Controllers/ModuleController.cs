@@ -46,18 +46,9 @@ namespace Tutor4MeApi.Data
         }
 
         [HttpGet("getAll")]
-        public IActionResult GetAllModules()
+        public List<Module> GetAllModules()
         {
-            var result = 1;
-
-            if(result == 0)
-            {
-                return Ok("error: all modules could not be returned");
-            } 
-            else
-            {
-                return Ok("modules retreived successfully...");
-            }
+            return  _service.GetAllModules();
         }
 
     }

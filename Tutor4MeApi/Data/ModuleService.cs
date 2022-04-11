@@ -34,9 +34,12 @@ namespace Tutor4MeApi.Data
         } 
 
         // Returns all modules in the DB
-        public int GetAllModules()
+        public List<Module> GetAllModules()
         {
-            return 1;
+            var  result =  _context.Module.ToList();
+            var objectList = new List<Module>();
+            result.ForEach(t => objectList.Add(t));
+            return objectList;      
         } 
 
     }
