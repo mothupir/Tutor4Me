@@ -5,8 +5,20 @@ namespace Tutor4MeApi.Models
 {
     public class Module
     {
+        public Module()
+        {
+        }
+
+        public Module(int moduleId, string name, string description)
+        {
+            ModuleId = moduleId;
+            Name = name;
+            Description = description;
+        }
+
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int ModuleId { get; set; }
         [Required]
         [MaxLength(150)]
         public string Name { get; set; }
