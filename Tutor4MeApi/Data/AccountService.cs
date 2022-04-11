@@ -15,6 +15,7 @@ namespace Tutor4MeApi.Data
         public int CreateTutor(Tutor tutor)
         {
             var checkTutor = _context.Tutors.Where(t => t.EmailAddress.ToLower() == tutor.EmailAddress.ToLower()).FirstOrDefault();
+
             if(checkTutor != null)
             {
                 return 0;

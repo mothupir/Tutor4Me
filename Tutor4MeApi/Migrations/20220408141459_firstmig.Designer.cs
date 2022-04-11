@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tutor4MeApi.Data;
 
@@ -11,9 +12,10 @@ using Tutor4MeApi.Data;
 namespace Tutor4MeApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220408141459_firstmig")]
+    partial class firstmig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,8 +62,6 @@ namespace Tutor4MeApi.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("RatingId");
-
-                    b.HasIndex("TutorId");
 
                     b.ToTable("Ratings");
                 });
@@ -174,17 +174,6 @@ namespace Tutor4MeApi.Migrations
                     b.HasKey("TutorId", "ModuleId");
 
                     b.ToTable("TutoredModule");
-                });
-
-            modelBuilder.Entity("Tutor4MeApi.Models.Rating", b =>
-                {
-                    b.HasOne("Tutor4MeApi.Models.Tutor", "Tutor")
-                        .WithMany()
-                        .HasForeignKey("TutorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Tutor");
                 });
 #pragma warning restore 612, 618
         }
