@@ -9,17 +9,19 @@ namespace Tutor4MeApi.Models
         {
         }
 
-        public Student(int id, string firstName, string lastName, string emailAddress, string phoneNumber)
+        public Student(int studentId, string firstName, string lastName, string emailAddress, string phoneNumber)
         {
-            Id = id;
+            StudentId = studentId;
             FirstName = firstName;
             LastName = lastName;
             EmailAddress = emailAddress;
             PhoneNumber = phoneNumber;
         }
 
+
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int StudentId { get; set; }
         [Required]
         [MaxLength(50)]
         public string FirstName { get; set; }

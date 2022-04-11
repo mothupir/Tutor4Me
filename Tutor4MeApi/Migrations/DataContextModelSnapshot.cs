@@ -24,11 +24,11 @@ namespace Tutor4MeApi.Migrations
 
             modelBuilder.Entity("Tutor4MeApi.Models.Module", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ModuleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ModuleId"), 1L, 1);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -40,9 +40,9 @@ namespace Tutor4MeApi.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ModuleId");
 
-                    b.ToTable("Module");
+                    b.ToTable("Modules");
                 });
 
             modelBuilder.Entity("Tutor4MeApi.Models.Rating", b =>
@@ -68,11 +68,11 @@ namespace Tutor4MeApi.Migrations
 
             modelBuilder.Entity("Tutor4MeApi.Models.Student", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("StudentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"), 1L, 1);
 
                     b.Property<string>("EmailAddress")
                         .IsRequired()
@@ -94,7 +94,7 @@ namespace Tutor4MeApi.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.HasKey("Id");
+                    b.HasKey("StudentId");
 
                     b.ToTable("Students");
                 });
@@ -127,16 +127,22 @@ namespace Tutor4MeApi.Migrations
 
                     b.HasKey("TimeslotId");
 
+                    b.HasIndex("ModuleId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TutorId");
+
                     b.ToTable("Timeslots");
                 });
 
             modelBuilder.Entity("Tutor4MeApi.Models.Tutor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TutordId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TutordId"), 1L, 1);
 
                     b.Property<string>("EmailAddress")
                         .IsRequired()
@@ -158,7 +164,7 @@ namespace Tutor4MeApi.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.HasKey("Id");
+                    b.HasKey("TutordId");
 
                     b.ToTable("Tutors");
                 });
@@ -173,7 +179,9 @@ namespace Tutor4MeApi.Migrations
 
                     b.HasKey("TutorId", "ModuleId");
 
-                    b.ToTable("TutoredModule");
+                    b.HasIndex("ModuleId");
+
+                    b.ToTable("TutoredModules");
                 });
 
             modelBuilder.Entity("Tutor4MeApi.Models.Rating", b =>
@@ -183,6 +191,52 @@ namespace Tutor4MeApi.Migrations
                         .HasForeignKey("TutorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Tutor");
+                });
+
+            modelBuilder.Entity("Tutor4MeApi.Models.Timeslot", b =>
+                {
+                    b.HasOne("Tutor4MeApi.Models.Module", "Module")
+                        .WithMany()
+                        .HasForeignKey("ModuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Tutor4MeApi.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Tutor4MeApi.Models.Tutor", "Tutor")
+                        .WithMany()
+                        .HasForeignKey("TutorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Module");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Tutor");
+                });
+
+            modelBuilder.Entity("Tutor4MeApi.Models.TutoredModule", b =>
+                {
+                    b.HasOne("Tutor4MeApi.Models.Module", "Module")
+                        .WithMany()
+                        .HasForeignKey("ModuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Tutor4MeApi.Models.Tutor", "Tutor")
+                        .WithMany()
+                        .HasForeignKey("TutorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Module");
 
                     b.Navigation("Tutor");
                 });
