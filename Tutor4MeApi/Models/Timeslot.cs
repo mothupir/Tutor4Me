@@ -20,10 +20,18 @@ namespace Tutor4MeApi.Models
             EndTime = endTime;
         }
 
+
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TimeslotId { get; set; }
+        [NotMapped]
+        public Tutor Tutor { get; set; }
         public int TutorId { get; set; }
+        [NotMapped]
+        public Student Student { get; set; }
         public int StudentId { get; set; }
+        [NotMapped]
+        public Module Module { get; set; }
         public int ModuleId { get; set; }
         [Required]
         public DateTime Date { get; set; }

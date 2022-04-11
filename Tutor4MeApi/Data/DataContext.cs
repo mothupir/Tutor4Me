@@ -16,8 +16,8 @@ namespace Tutor4MeApi.Data
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Tutor> Tutors { get; set; }
-        public DbSet<Module> Module { get; set; }
-        public DbSet<TutoredModule> TutoredModule { get; set; }
+        public DbSet<Module> Modules { get; set; }
+        public DbSet<TutoredModule> TutoredModules { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Timeslot> Timeslots { get; set; }
     }
