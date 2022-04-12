@@ -10,6 +10,31 @@ namespace Tutor4MeApi.Data
         {
             _context = context;
         }
+
+        public int AddRating(Timeslot timeslot){
+
+            var checkTimeslot = _context.Timeslots.Find(timeslot.TimeslotdId);
+
+            if(checkTimeslot == null)
+            {
+                return 0;
+            }
+
+            checkTimeslot = new Timeslot(timeslot);
+
+            _context.Timeslots.Update(checkTimeslot);
+            _context.SaveChanges();
+            return 1;
+
+        }
+
+        public int GetTutorAverageRating(int tutorId){
+            //TODO
+        }
+
+        public int GetTutorAverageRatingByModule(int tutorId, int moduleId){
+            //TODO
+        }
     
     }
 }
