@@ -16,6 +16,13 @@ namespace Tutor4MeApi.Models
             Score = score;
         }
 
+        public Rating(Rating rating)
+        {
+            RatingId = rating.RatingId;
+            TutorId = rating.TutorId;
+            Score= rating.Score;
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RatingId { get; set; }
