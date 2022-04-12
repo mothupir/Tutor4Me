@@ -10,7 +10,7 @@ namespace Tutor4MeApi.Data
             _context = context;
         }
 
-        public int CreateTimeslot(Timeslot timeslot)
+         int ITimeslotService.CreateTimeslot(Timeslot timeslot)
         {
             if (DateTime.Compare(timeslot.StartTime, timeslot.EndTime) >= 0)
             {
@@ -32,6 +32,34 @@ namespace Tutor4MeApi.Data
             return 409;
 
         }
-        
+
+        int ITimeslotService.BookTimeslot(int studentID, int moduleID, int timeslotID)
+        {
+            var timeslot = _context.Timeslots.Where(t => t.TimeslotId == timeslotID).FirstOrDefault();
+            if (timeslot == null)
+            {
+                return 404;
+            }
+            if (timeslot.TutorId ==0)
+            {
+                return 404;
+            }
+            if (timeslot.StudentId != 0 || moduleID !=0)
+            {
+                return 409;
+            }
+            try
+            {
+                timeslot.StudentId= studentID;
+                timeslot.ModuleId= moduleID;
+                _context.SaveChanges();
+                return 200;
+            }catch (Exception ex)
+            {
+                ex.GetBaseException();
+                return 304;
+            } 
+
+        }
     }
 }
