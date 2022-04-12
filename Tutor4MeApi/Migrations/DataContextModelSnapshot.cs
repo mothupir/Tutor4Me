@@ -61,8 +61,6 @@ namespace Tutor4MeApi.Migrations
 
                     b.HasKey("RatingId");
 
-                    b.HasIndex("TutorId");
-
                     b.ToTable("Ratings");
                 });
 
@@ -127,12 +125,6 @@ namespace Tutor4MeApi.Migrations
 
                     b.HasKey("TimeslotId");
 
-                    b.HasIndex("ModuleId");
-
-                    b.HasIndex("StudentId");
-
-                    b.HasIndex("TutorId");
-
                     b.ToTable("Timeslots");
                 });
 
@@ -179,66 +171,7 @@ namespace Tutor4MeApi.Migrations
 
                     b.HasKey("TutorId", "ModuleId");
 
-                    b.HasIndex("ModuleId");
-
                     b.ToTable("TutoredModules");
-                });
-
-            modelBuilder.Entity("Tutor4MeApi.Models.Rating", b =>
-                {
-                    b.HasOne("Tutor4MeApi.Models.Tutor", "Tutor")
-                        .WithMany()
-                        .HasForeignKey("TutorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Tutor");
-                });
-
-            modelBuilder.Entity("Tutor4MeApi.Models.Timeslot", b =>
-                {
-                    b.HasOne("Tutor4MeApi.Models.Module", "Module")
-                        .WithMany()
-                        .HasForeignKey("ModuleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Tutor4MeApi.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Tutor4MeApi.Models.Tutor", "Tutor")
-                        .WithMany()
-                        .HasForeignKey("TutorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Module");
-
-                    b.Navigation("Student");
-
-                    b.Navigation("Tutor");
-                });
-
-            modelBuilder.Entity("Tutor4MeApi.Models.TutoredModule", b =>
-                {
-                    b.HasOne("Tutor4MeApi.Models.Module", "Module")
-                        .WithMany()
-                        .HasForeignKey("ModuleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Tutor4MeApi.Models.Tutor", "Tutor")
-                        .WithMany()
-                        .HasForeignKey("TutorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Module");
-
-                    b.Navigation("Tutor");
                 });
 #pragma warning restore 612, 618
         }

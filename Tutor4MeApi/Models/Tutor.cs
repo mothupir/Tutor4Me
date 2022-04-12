@@ -18,6 +18,15 @@ namespace Tutor4MeApi.Models
             PhoneNumber = phoneNumber;
         }
 
+        public Tutor(Tutor tutor)
+        {
+            TutordId = tutor.TutordId;
+            FirstName = tutor.FirstName;
+            LastName = tutor.LastName;
+            EmailAddress = tutor.EmailAddress;
+            PhoneNumber = tutor.PhoneNumber;
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TutordId { get; set; }

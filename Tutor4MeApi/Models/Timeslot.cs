@@ -20,6 +20,17 @@ namespace Tutor4MeApi.Models
             EndTime = endTime;
         }
 
+        public Timeslot(Timeslot timeslot)
+        {
+            TimeslotId = timeslot.TimeslotId;
+            TutorId= timeslot.TutorId;
+            StudentId = timeslot.StudentId;
+            ModuleId = timeslot.ModuleId;
+            Date = timeslot.Date;
+            StartTime = timeslot.StartTime;
+            EndTime = timeslot.EndTime;
+        }
+
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
