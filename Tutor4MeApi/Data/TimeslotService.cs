@@ -12,7 +12,7 @@ namespace Tutor4MeApi.Data
 
          int ITimeslotService.CreateTimeslot(Timeslot timeslot)
         {
-            if (DateTime.Compare(timeslot.StartTime, timeslot.EndTime) >= 0)
+            if (timeslot.TutorId == 0 ||DateTime.Compare(timeslot.StartTime, timeslot.EndTime) >= 0)
             {
                 return 400;
             }
@@ -40,13 +40,17 @@ namespace Tutor4MeApi.Data
             {
                 return 404;
             }
-            if (timeslot.TutorId ==0)
+            if (timeslot.TutorId == 0)
             {
                 return 404;
             }
-            if (timeslot.StudentId != 0 || moduleID !=0)
+            if (timeslot.StudentId != 0 || timeslot.ModuleId != 0)
             {
                 return 409;
+            }
+            if (studentID == 0 || moduleID == 0)
+            {
+                return 400;
             }
             try
             {
@@ -57,8 +61,54 @@ namespace Tutor4MeApi.Data
             }catch (Exception ex)
             {
                 ex.GetBaseException();
-                return 304;
+                return 500;
             } 
+
+        }
+        int ITimeslotService.CancelBooking (int timeslotID)
+        {
+            var timeslot = _context.Timeslots.Where(t => t.TimeslotId == timeslotID).FirstOrDefault();
+            if (timeslot == null)
+            {
+                return 404;
+            }
+            try
+            {
+                timeslot.StudentId = 0;
+                timeslot.ModuleId = 0;
+                _context.SaveChanges();
+                return 200;
+            }
+            catch (Exception ex)
+            {
+                ex.GetBaseException();
+                return 500;
+            }
+
+        }
+        dynamic ITimeslotService.getTimeslots(int tutorID)
+        {
+            dynamic timeslots = _context.Timeslots.Where(t=> t.TutorId == tutorID).ToList();
+            return timeslots;
+
+        }
+        int ITimeslotService.deleteTimeslot(int timeslotID)
+        {
+            var timeslot = _context.Timeslots.Where(t => t.TimeslotId == timeslotID).FirstOrDefault();
+            if (timeslot == null)
+            {
+                return 404;
+            }
+            try
+            {
+                _context.Timeslots.Remove(timeslot);
+                _context.SaveChanges();
+                return 200;
+            }catch (Exception ex)
+            {
+                ex.GetBaseException();
+                return 500;
+            }
 
         }
     }

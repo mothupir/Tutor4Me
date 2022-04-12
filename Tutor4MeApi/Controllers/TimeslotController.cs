@@ -18,7 +18,7 @@ namespace Tutor4MeApi.Data
         }
 
         [HttpPost("create")]
-        public IActionResult AddTimeslot(Timeslot timeslot)
+        public IActionResult CreateTimeslot(Timeslot timeslot)
         {
             var results = timeslotService.CreateTimeslot(timeslot);
             if (results == 200)
@@ -27,7 +27,7 @@ namespace Tutor4MeApi.Data
             }
             else if (results == 400)
             {
-                return BadRequest("Start time cannot be after the end time");
+                return BadRequest("Invalid values");
             }
             else
                 return Conflict("Timslot already exists");
@@ -50,8 +50,51 @@ namespace Tutor4MeApi.Data
             {
                 return Conflict("This timeslot has already been booked");
             }
+            else if (results ==400)
+            {
+                return BadRequest("Please provide valid values");
+            }
 
             return StatusCode(500, "Timeslot could not be booked");
+        }
+        [HttpPut("cancel/{timeslotID}")]
+        public IActionResult CancelBooking (int timeslotID)
+        {
+            var results = timeslotService.CancelBooking(timeslotID);
+
+            if (results ==200)
+            {
+                return Ok("Bokking successfuly cancelled");
+            }
+            else if (results==404)
+            {
+                return NotFound("Booking does not exist");
+            }
+            return StatusCode(500, "Booking could not be  cancelled");
+
+        }
+
+        [HttpGet("get/timeslots{tutorID}")]
+        public IActionResult getTimeslots (int tutorID)
+        {
+            var results = timeslotService.getTimeslots(tutorID);
+            return Ok(results);
+
+        }
+        [HttpPut("deleteTimeslot{timeslotID}")]
+        public  IActionResult deleteTimeslot (int timeslotID)
+        {
+            var results = timeslotService.deleteTimeslot(timeslotID);
+            if (results == 200)
+            {
+                return Ok("Timeslot successfully deleted");
+            }
+            if (results ==404)
+            {
+                return NotFound("Timeslot does not exist");
+            }
+            return StatusCode(500, "Timeslot could not be deleted");
+
         }
     }
 }
