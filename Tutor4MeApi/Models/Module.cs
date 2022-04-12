@@ -16,6 +16,13 @@ namespace Tutor4MeApi.Models
             Description = description;
         }
 
+        public Module(Module module)
+        {
+            ModuleId = module.ModuleId;
+            Name = module.Name;
+            Description = module.Description;
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ModuleId { get; set; }
