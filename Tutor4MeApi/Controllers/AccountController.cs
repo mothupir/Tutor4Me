@@ -31,6 +31,7 @@ namespace Tutor4MeApi.Data
             }
         }
 
+        [HttpGet("tutor/get/{id}")]
         public IActionResult GetTutor(int id)
         {
             var result = _service.GetTutor(id);
@@ -43,6 +44,7 @@ namespace Tutor4MeApi.Data
             return Ok(result);
         }
 
+        [HttpPost("tutor/update")]
         public IActionResult UpdateTutor(Tutor tutor)
         {
             var result = _service.UpdateTutor(tutor);
@@ -55,6 +57,7 @@ namespace Tutor4MeApi.Data
             return Ok($"Tutor with TutorId: {tutor.TutordId} was updated successfuly...");
         }
 
+        [HttpGet("tutor/delete/{id}")]
         public IActionResult DeleteTutor(int id)
         {
             var result = _service.DeleteTutor(id);
@@ -84,6 +87,7 @@ namespace Tutor4MeApi.Data
             }
         }
 
+        [HttpGet("student/get/{id}")]
         public IActionResult GetStudent(int id)
         {
             var result = _service.GetStudent(id);
@@ -96,6 +100,7 @@ namespace Tutor4MeApi.Data
             return Ok(result);
         }
 
+        [HttpPost("student/update")]
         public IActionResult UpdateStudent(Student student)
         {
             var result = _service.UpdateStudent(student);
@@ -108,6 +113,7 @@ namespace Tutor4MeApi.Data
             return Ok($"Studnt with StudentId: {student.StudentId} was updated successfuly...");
         }
 
+        [HttpGet("student/delete/{id}")]
         public IActionResult DeleteStudent(int id)
         {
             var result = _service.DeleteStudent(id);
