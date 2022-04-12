@@ -15,6 +15,8 @@ builder.Services.AddDbContext<DataContext>(
 
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ITutorService, TutorService>();
+builder.Services.AddScoped<ITimeslotService, TimeslotService>();
+
 
 var app = builder.Build();
 

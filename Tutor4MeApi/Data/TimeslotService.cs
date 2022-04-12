@@ -10,7 +10,7 @@ namespace Tutor4MeApi.Data
             _context = context;
         }
 
-        public int AddTimeslot(Timeslot timeslot)
+        public int CreateTimeslot(Timeslot timeslot)
         {
             if (DateTime.Compare(timeslot.StartTime, timeslot.EndTime) >= 0)
             {

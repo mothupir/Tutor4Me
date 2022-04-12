@@ -4,6 +4,6 @@ namespace Tutor4MeApi.Data
 {
     public interface ITimeslotService
     {
-        int AddTimeslot(Timeslot timeslot);
+        int CreateTimeslot(Timeslot timeslot);
     }
 }

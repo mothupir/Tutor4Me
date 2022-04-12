@@ -17,17 +17,17 @@ namespace Tutor4MeApi.Data
             this.timeslotService=timeslotService;
         }
 
-        [HttpPost("book")]
+        [HttpPost("create")]
         public IActionResult addTimeslot (Timeslot timeslot)
         {
-            var results = timeslotService.AddTimeslot(timeslot);
+            var results = timeslotService.CreateTimeslot(timeslot);
             if (results == 200)
             {
                 return Ok($"Timeslot for {timeslot.Date} at {timeslot.StartTime} has been succesfully created");
             }
             else if(results == 400)
             {
-                return BadRequest("Start tme cannot be after the end time");
+                return BadRequest("Start time cannot be after the end time");
             }
             else
             return Conflict("Timslot already exists");
