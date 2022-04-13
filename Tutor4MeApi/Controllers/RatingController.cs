@@ -35,20 +35,20 @@ namespace Tutor4MeApi.Data
 
             if(result == null)
             {
-                return NotFound($"Tutor with TutorId: {id} was not found!!!");
+                return NotFound($"Tutor with TutorId: {tutorId} was not found!!!");
             }
 
             return Ok(result);
         }
 
-        [HttpGet("rating/getaveragebymodule")]
+        [HttpGet("rating/getaveragebymodule/{tutorId}/{moduleId}")]
         public IActionResult GetTutorAverageRatingByModule(int tutorId, int moduleId)
         {
-            var result = _service.GetTutorAverageRatingByModule(id, int moduleId);
+            var result = _service.GetTutorAverageRatingByModule(tutorId, moduleId);
 
             if(result == null)
             {
-                return NotFound($"Tutor with TutorId: {id} was not found!!!");
+                return NotFound($"Tutor with TutorId: {tutorId} was not found!!!");
             }
 
             return Ok(result);
