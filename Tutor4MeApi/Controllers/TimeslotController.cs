@@ -10,29 +10,91 @@ namespace Tutor4MeApi.Data
     [ApiController]
     public class TimeslotController : ControllerBase
     {
-       private readonly ITimeslotService timeslotService;
+        private readonly ITimeslotService timeslotService;
 
-        public TimeslotController (ITimeslotService timeslotService)
+        public TimeslotController(ITimeslotService timeslotService)
         {
-            this.timeslotService=timeslotService;
+            this.timeslotService = timeslotService;
         }
 
-        [HttpPost("book")]
-        public IActionResult addTimeslot (Timeslot timeslot)
+        [HttpPost("create")]
+        public IActionResult CreateTimeslot(Timeslot timeslot)
         {
-            var results = timeslotService.AddTimeslot(timeslot);
+            var results = timeslotService.CreateTimeslot(timeslot);
             if (results == 200)
             {
                 return Ok($"Timeslot for {timeslot.Date} at {timeslot.StartTime} has been succesfully created");
             }
-            else if(results == 400)
+            else if (results == 400)
             {
-                return BadRequest("Start tme cannot be after the end time");
+                return BadRequest("Invalid values");
             }
             else
-            return Conflict("Timslot already exists");
-            
+                return Conflict("Timslot already exists");
+
+        }
+
+        [HttpPut("book/{studentID}/{moduleID}")]
+        public IActionResult BookTimeslot(int studentID, int moduleID, [FromBody] int timeslotID)
+        {
+            var results = timeslotService.BookTimeslot(studentID, moduleID, timeslotID);
+            if (results == 200)
+            {
+                return Ok($"A booking with a tutor has been successfull");
+            }
+            else if (results == 404)
+            {
+                return NotFound("Cannot  book a timeslot that does not exist");
+            }
+            else if (results == 409)
+            {
+                return Conflict("This timeslot has already been booked");
+            }
+            else if (results ==400)
+            {
+                return BadRequest("Please provide valid values");
+            }
+
+            return StatusCode(500, "Timeslot could not be booked");
+        }
+        [HttpPut("cancel/{timeslotID}")]
+        public IActionResult CancelBooking (int timeslotID)
+        {
+            var results = timeslotService.CancelBooking(timeslotID);
+
+            if (results ==200)
+            {
+                return Ok("Bokking successfuly cancelled");
+            }
+            else if (results==404)
+            {
+                return NotFound("Booking does not exist");
+            }
+            return StatusCode(500, "Booking could not be  cancelled");
+
+        }
+
+        [HttpGet("get/timeslots{tutorID}")]
+        public IActionResult getTimeslots (int tutorID)
+        {
+            var results = timeslotService.getTimeslots(tutorID);
+            return Ok(results);
+
+        }
+        [HttpPut("deleteTimeslot{timeslotID}")]
+        public  IActionResult deleteTimeslot (int timeslotID)
+        {
+            var results = timeslotService.deleteTimeslot(timeslotID);
+            if (results == 200)
+            {
+                return Ok("Timeslot successfully deleted");
+            }
+            if (results ==404)
+            {
+                return NotFound("Timeslot does not exist");
+            }
+            return StatusCode(500, "Timeslot could not be deleted");
+
         }
     }
-
 }
