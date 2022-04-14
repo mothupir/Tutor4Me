@@ -33,6 +33,12 @@ namespace Tutor4MeApi.Data
             return 1;
         } 
 
+
+        public Module GetModule(int moduleId)
+        {
+            return _context.Modules.Where(m => m.ModuleId == moduleId).SingleOrDefault();
+        } 
+
         // Returns all modules in the DB
         public List<Module> GetAllModules()
         {
