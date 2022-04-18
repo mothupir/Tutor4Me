@@ -4,7 +4,7 @@ namespace Tutor4MeApi.Data
 {
     public interface IRatingService
     {
-        int AddRating(Timeslot timeslot);
+        int AddRating(int tutorId, int rating);
         int GetTutorAverageRating(int tutorId);
         int GetTutorAverageRatingByModule(int tutorId, int moduleId);
     }

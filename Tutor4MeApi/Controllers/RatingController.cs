@@ -15,20 +15,20 @@ namespace Tutor4MeApi.Data
             _service = service;
         }
 
-        [HttpPost("rating/add")]
-        public IActionResult AddRating(Timeslot timeslot)
+        [HttpPost("rating/add/{tutorId}/{rating}")]
+        public IActionResult AddRating(int tutorId, int rating)
         {
-            var result = _service.AddRating(timeslot);
+            var result = _service.AddRating(tutorId, rating);
 
             if(result == 0)
             {
-                return NotFound($"Timeslot with TimeslotId: {timeslot.TimeslotId} was not found!!!");
+                return NotFound($"Tutor with TutorId: {tutorId} was not found!!!");
             }
 
-            return Ok($"Timeslot with TimeslotId: {timeslot.TimeslotId} was rated successfuly...");
+            return Ok($"Rating for tutor with TutorId: {tutorId} was added successfully...");
         }
 
-        [HttpGet("rating/getaverage")]
+        [HttpGet("rating/getaverage/{tutorId}")]
         public IActionResult GetTutorAverageRating(int tutorId)
         {
             var result = _service.GetTutorAverageRating(tutorId);

@@ -11,30 +11,53 @@ namespace Tutor4MeApi.Data
             _context = context;
         }
 
-        public int AddRating(Timeslot timeslot){
+        public int AddRating(int tutorId, int rating){
 
-            var checkTimeslot = _context.Timeslots.Find(timeslot.TimeslotId);
+            var checkTutor = _context.Tutors.Find(tutorId);
 
-            if(checkTimeslot == null)
+            if(checkTutor == null)
             {
                 return 0;
             }
 
-            checkTimeslot = new Timeslot(timeslot);
+            newRating = new Rating()
+            {
+                RatingId = 0,
+                TutorId = tutorId,
+                Score = rating
+            };
 
-            _context.Timeslots.Update(checkTimeslot);
+            _context.Ratings.Add(newRating);
             _context.SaveChanges();
             return 1;
 
         }
 
         public int GetTutorAverageRating(int tutorId){
-            //TODO
-            return 0;
+
+            var checkTutor = _context.Tutors.Find(tutorId);
+
+            if(checkTutor == null)
+            {
+                return 0;
+            }
+
+            List<Rating> tutorRatings = _context.Ratings.Where(r => r.TutorId == tutorId).ToList();
+
+            var totalScore = 0;
+            foreach (Rating r in tutorRatings)
+            {
+                totalScore = totalScore + r.Score;
+            }
+
+            var averageRating = totalScore/tutorRatings.Count;
+
+            return averageRating;
+            
         }
 
         public int GetTutorAverageRatingByModule(int tutorId, int moduleId){
-            //TODO
+            //Can't be done with current DB structure
             return 0;
         }
     
