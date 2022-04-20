@@ -13,9 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("Tutor4MeDB")));
 
-builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ITutorService, TutorService>();
-builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<ITimeslotService, TimeslotService>();
 builder.Services.AddScoped<IModuleService, ModuleService>();
 builder.Services.AddScoped<IStudentService, StudentService>();

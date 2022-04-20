@@ -18,6 +18,17 @@ namespace Tutor4MeApi.Data
             _context.SaveChanges();
             return 1;
         }
+        public List<Module> getOfferedModulesByTutor(int tutorId)
+        {
+            List<Module> modules = new List<Module>();
+            List<TutoredModule> tutoredModules = _context.TutoredModules.Where(tm => tm.TutorId == tutorId).ToList();
+            foreach (TutoredModule tm in tutoredModules)
+            {
+                Module module = _context.Modules.Find(tm.ModuleId);
+                modules.Add(module);
+            }
+            return modules;
+        }
 
         // Check if a module with the same moduleId exists, is so, that module gets deleleted, and 1 gets returned, if not, 0 gets returned
         public int DeleteModule(int moduleId)
@@ -55,7 +66,7 @@ namespace Tutor4MeApi.Data
 
             foreach (var Module in objectList)
             {
-                if (Module.Name.Contains(searchTerm))
+                if (Module.Name.ToLower().Contains(searchTerm.ToLower()))
                 {
                     result.Add(Module);
                 }
@@ -70,7 +81,7 @@ namespace Tutor4MeApi.Data
 
             foreach (var Module in objectList)
             {
-                if (Module.Description.Contains(searchTerm))
+                if (Module.Description.ToLower().Contains(searchTerm.ToLower()))
                 {
                     result.Add(Module);
                 }

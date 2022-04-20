@@ -15,6 +15,18 @@ namespace Tutor4MeApi.Data
             _service = service;
         }
 
+
+        [HttpGet("get/modules/{tutorId}")]
+        public IActionResult GetOfferedModulesByTutor(int tutorId)
+        {
+            var result = _service.getOfferedModulesByTutor(tutorId);
+            if (result.Count == 0)
+            {
+                return NotFound($"No module offered by tutor with tutorId:{tutorId} was found!!!");
+            }
+            return Ok(result);
+        }
+
         [HttpPost("create")]
         public IActionResult CreateModule(Module module)
         {

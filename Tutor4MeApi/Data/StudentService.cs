@@ -11,34 +11,53 @@ namespace Tutor4MeApi.Data
         }
 
 
-        public List<Tutor> getAllTutorsByModule(int moduleId)
+
+        public int CreateStudent(Student student)
         {
-            List<Tutor> tutors = new List<Tutor>();
-            List<TutoredModule> tutoredModules = _context.TutoredModules.Where(tm => tm.ModuleId == moduleId).ToList();
-            foreach (TutoredModule tm in tutoredModules)
+            var checkStudent = _context.Students.Where(s => s.EmailAddress.ToLower() == student.EmailAddress.ToLower()).FirstOrDefault();
+            if (checkStudent != null)
             {
-                tutors.Add(this.getTutorInformation(tm.TutorId));
+                return 0;
             }
-            return tutors;
+
+            _context.Students.Add(student);
+            _context.SaveChanges();
+            return 1;
         }
-        public List<Tutor> getAllTutors()
+
+        public Student? GetStudent(int id)
         {
-            return _context.Tutors.ToList();
+            return _context.Students.Find(id);
         }
-        public List<Module> getOfferedModulesByTutor(int tutorId)
+
+        public int UpdateStudent(Student student)
         {
-            List<Module> modules = new List<Module>();
-            List<TutoredModule> tutoredModules = _context.TutoredModules.Where(tm => tm.TutorId == tutorId).ToList();
-            foreach (TutoredModule tm in tutoredModules)
+            var checkStudent = _context.Students.Find(student.StudentId);
+
+            if (checkStudent == null)
             {
-                Module module = _context.Modules.Find(tm.ModuleId);
-                modules.Add(module);
+                return 0;
             }
-            return modules;
+
+            checkStudent = new Student(student);
+
+            _context.Students.Update(checkStudent);
+            _context.SaveChanges();
+            return 1;
         }
-        public Tutor? getTutorInformation(int tutorId)
+
+        public int DeleteStudent(int id)
         {
-            return _context.Tutors.Find(tutorId);
+            var student = _context.Students.Find(id);
+
+            if (student == null)
+            {
+                return 0;
+            }
+
+            _context.Students.Remove(student);
+            _context.SaveChanges();
+            return 1;
         }
     }
 }
