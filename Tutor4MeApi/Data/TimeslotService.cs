@@ -36,7 +36,7 @@ namespace Tutor4MeApi.Data
         int ITimeslotService.BookTimeslot(int studentID, int moduleID, int timeslotID)
         {
             var timeslot = _context.Timeslots.Where(t => t.TimeslotId == timeslotID).FirstOrDefault();
-            if (timeslot == null)
+            if (timeslot == null || DateTime.Compare(DateTime.Now, timeslot.Date) >0)
             {
                 return 404;
             }
