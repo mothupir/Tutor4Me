@@ -15,11 +15,10 @@ builder.Services.AddDbContext<DataContext>(
 
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ITutorService, TutorService>();
+builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<ITimeslotService, TimeslotService>();
-
 builder.Services.AddScoped<IModuleService, ModuleService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
-
 
 var app = builder.Build();
 
