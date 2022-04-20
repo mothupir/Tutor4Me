@@ -23,7 +23,7 @@ namespace Tutor4MeApi.Data
         public int DeleteModule(int moduleId)
         {
             var deleteObject = _context.Modules.Where(m => m.ModuleId == moduleId).SingleOrDefault();
-            if (deleteObject == null) 
+            if (deleteObject == null)
             {
                 return 0;
             }
@@ -31,21 +31,51 @@ namespace Tutor4MeApi.Data
             _context.Modules.Remove(deleteObject);
             _context.SaveChanges();
             return 1;
-        } 
+        }
 
 
         public Module GetModule(int moduleId)
         {
             return _context.Modules.Where(m => m.ModuleId == moduleId).SingleOrDefault();
-        } 
+        }
 
         // Returns all modules in the DB
         public List<Module> GetAllModules()
         {
-            var  result =  _context.Modules.ToList();
+            var result = _context.Modules.ToList();
             var objectList = new List<Module>();
             result.ForEach(t => objectList.Add(t));
-            return objectList;      
-        } 
+            return objectList;
+        }
+
+        public List<Module> GetModuleByNameSubstring(String searchTerm)
+        {
+            var objectList = GetAllModules();
+            var result = new List<Module>();
+
+            foreach (var Module in objectList)
+            {
+                if (Module.Name.Contains(searchTerm))
+                {
+                    result.Add(Module);
+                }
+            }
+            return result;
+        }
+
+        public List<Module> GetModuleByKeywordDesc(String searchTerm)
+        {
+            var objectList = GetAllModules();
+            var result = new List<Module>();
+
+            foreach (var Module in objectList)
+            {
+                if (Module.Description.Contains(searchTerm))
+                {
+                    result.Add(Module);
+                }
+            }
+            return result;
+        }
     }
 }
