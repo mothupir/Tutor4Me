@@ -46,13 +46,13 @@ namespace Tutor4MeApi.Controllers
         {
             var result = _service.CreateTutor(tutor);
 
-            if (result == 0)
+            if (result == null)
             {
                 return Ok("tutor with the provided email already exists!!!");
             }
             else
             {
-                return Ok("tutor added successfully...");
+                return Ok(result);
             }
         }
 
