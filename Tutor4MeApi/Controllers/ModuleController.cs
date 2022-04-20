@@ -53,12 +53,24 @@ namespace Tutor4MeApi.Data
     
         }
 
-
         [HttpGet("getAll")]
         public List<Module> GetAllModules()
         {
             return  _service.GetAllModules();
         }
+
+        [HttpGet("getModuleByNameSubstring/{searchTerm}")]
+        public List<Module> GetModuleByNameSubstring(String searchTerm)
+        {
+            return _service.GetModuleByNameSubstring(searchTerm);
+        }
+
+        [HttpGet("getModuleByKeywordDesc/{searchTerm}")]
+        public List<Module> GetModuleByKeywordDesc(String searchTerm)
+        {
+            return _service.GetModuleByKeywordDesc(searchTerm);
+        }
+
 
     }
 }
