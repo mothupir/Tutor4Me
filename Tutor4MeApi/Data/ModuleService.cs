@@ -55,7 +55,7 @@ namespace Tutor4MeApi.Data
 
             foreach (var Module in objectList)
             {
-                if (Module.Name.Contains(searchTerm))
+                if (Module.Name.ToLower().Contains(searchTerm.ToLower()))
                 {
                     result.Add(Module);
                 }
@@ -70,7 +70,7 @@ namespace Tutor4MeApi.Data
 
             foreach (var Module in objectList)
             {
-                if (Module.Description.Contains(searchTerm))
+                if (Module.Description.ToLower().Contains(searchTerm.ToLower()))
                 {
                     result.Add(Module);
                 }
