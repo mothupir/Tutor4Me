@@ -1,4 +1,6 @@
 ﻿using Tutor4MeApi.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Tutor4MeApi.Data
 {
@@ -26,9 +28,27 @@ namespace Tutor4MeApi.Data
             return 1;
         }
 
-        public Tutor? GetTutor(int id)
+        public Dictionary<string,string> GetTutor(int id)
         {
-            return _context.Tutors.Find(id);
+            var map = new Dictionary<string,string>();
+            var tutor = _context.Tutors.Find(id);
+
+            if(tutor == null)
+            {
+                return map;
+            }
+
+            var rs = new RatingService(_context);
+            var rating = rs.GetTutorAverageRating(tutor.TutordId);
+
+            
+            map.Add("Name",tutor.FirstName+" "+tutor.LastName);
+            map.Add("Email",tutor.EmailAddress);
+            map.Add("Number",tutor.PhoneNumber);
+            map.Add("Rating",rating.ToString());
+
+            return map;
+
         }
 
         public int UpdateTutor(Tutor tutor)

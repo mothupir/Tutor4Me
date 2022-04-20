@@ -6,7 +6,7 @@ namespace Tutor4MeApi.Data
     {
         // Tutor
         int CreateTutor(Tutor tutor);
-        Tutor? GetTutor(int id);
+        Dictionary<string,string> GetTutor(int id);
         int UpdateTutor(Tutor tutor);
         int DeleteTutor(int id);
 
