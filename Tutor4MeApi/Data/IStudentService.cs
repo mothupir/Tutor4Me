@@ -13,6 +13,10 @@ namespace Tutor4MeApi.Data
         List<Tutor> getAllTutors();
         List<Module> getOfferedModulesByTutor(int tutorId);
         Tutor? getTutorInformation(int tutorId);
+        int CreateStudent(Student student);
+        Student? GetStudent(int id);
+        int UpdateStudent(Student student);
+        int DeleteStudent(int id);
 
     }
 }
