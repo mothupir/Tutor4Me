@@ -109,5 +109,14 @@ namespace Tutor4MeApi.Data
             var results = timeslotService.GetBookedTimeslotsTutor(studentID);
             return Ok(results);
         }
+
+        [HttpGet("get/bookings/available/{tutorID}")]
+        public IActionResult GetTutorAvailableTimeslots(int tutorID)
+        {
+            var availableTimeslots = timeslotService.GetTutorAvailableTimeslots(tutorID);
+            if (availableTimeslots.Count==0)
+                return NotFound("No available timeslots for this tutor");
+            return Ok(availableTimeslots);
+        }
     }
 }

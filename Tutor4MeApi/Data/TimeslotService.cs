@@ -122,5 +122,11 @@ namespace Tutor4MeApi.Data
             return bookedTimeslots;
 
         }
+
+        dynamic ITimeslotService.GetTutorAvailableTimeslots(int tutorID)
+        {
+            dynamic bookedTimeslots = _context.Timeslots.Where(t => t.TutorId == tutorID && t.StudentId == 0 && t.ModuleId == 0).ToList();
+            return bookedTimeslots;
+        }
     }
 }
