@@ -122,9 +122,9 @@ namespace Tutor4MeApi.Controllers
         }
 
         [HttpGet("get/tutors/{moduleId}")]
-        public IActionResult getAllTutorsByModule(int moduleId)
+        public IActionResult GetAllTutorsByModule(int moduleId)
         {
-            var result = _service.getAllTutorsByModule(moduleId);
+            var result = _service.GetAllTutorsByModule(moduleId);
             if (result.Count == 0)
             {
                 return NotFound($"Tutors for the module with ModuleId: {moduleId} were not found!!!");
@@ -132,10 +132,10 @@ namespace Tutor4MeApi.Controllers
             return Ok(result);
 
         }
-        [HttpGet("get/tutors/")]
-        public IActionResult GetAllTutors()
+        [HttpGet("get/tutorsSorted/{sortBy}")]
+        public IActionResult GetAllTutors(string sortBy)
         {
-            var result = _service.getAllTutors();
+            var result = _service.GetAllTutors(sortBy);
             if (result.Count == 0)
             {
                 return NotFound($"No tutor was found!!!");
@@ -147,7 +147,7 @@ namespace Tutor4MeApi.Controllers
         [HttpGet("get/tutorInformation/{tutorId}")]
         public IActionResult GetTutorInformation(int tutorId)
         {
-            var result = _service.getTutorInformation(tutorId);
+            var result = _service.GetTutorInformation(tutorId);
             if (result == null)
             {
                 return NotFound($"Tutor with TutorId: {tutorId} was not found!!!");

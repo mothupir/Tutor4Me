@@ -18,7 +18,7 @@ namespace Tutor4MeApi.Data
             _context.SaveChanges();
             return 1;
         }
-        public List<Module> getOfferedModulesByTutor(int tutorId)
+        public List<Module> GetOfferedModulesByTutor(int tutorId)
         {
             List<Module> modules = new List<Module>();
             List<TutoredModule> tutoredModules = _context.TutoredModules.Where(tm => tm.TutorId == tutorId).ToList();
