@@ -28,7 +28,7 @@ namespace Tutor4MeApi.Controllers
             return Ok($"Module with ModuleId: {modueId} for Tutor with TutorId: {tutorId} was added successfully...");
         }
 
-        [HttpPost("removetutoredmodule/{tutorId}/{moduleId}")]
+        [HttpDelete("removetutoredmodule/{tutorId}/{moduleId}")]
         public IActionResult RemoveTutoredModule(int tutorId, int modueId)
         {
             var result = _service.RemoveTutoredModule(tutorId, modueId);
