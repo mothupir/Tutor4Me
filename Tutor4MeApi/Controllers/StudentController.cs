@@ -62,7 +62,7 @@ namespace Tutor4MeApi.Controllers
             return Ok(result);
         }
 
-        [HttpPost("student/create")]
+        [HttpPost("create")]
         public IActionResult CreateStudent(Student student)
         {
             var result = _service.CreateStudent(student);
@@ -77,7 +77,7 @@ namespace Tutor4MeApi.Controllers
             }
         }
 
-        [HttpGet("student/get/{id}")]
+        [HttpGet("get/{id}")]
         public IActionResult GetStudent(int id)
         {
             var result = _service.GetStudent(id);
@@ -90,7 +90,7 @@ namespace Tutor4MeApi.Controllers
             return Ok(result);
         }
 
-        [HttpPut("student/update")]
+        [HttpPut("update")]
         public IActionResult UpdateStudent(Student student)
         {
             var result = _service.UpdateStudent(student);
@@ -103,7 +103,7 @@ namespace Tutor4MeApi.Controllers
             return Ok($"Studnt with StudentId: {student.StudentId} was updated successfuly...");
         }
 
-        [HttpDelete("student/delete/{id}")]
+        [HttpDelete("delete/{id}")]
         public IActionResult DeleteStudent(int id)
         {
             var result = _service.DeleteStudent(id);
