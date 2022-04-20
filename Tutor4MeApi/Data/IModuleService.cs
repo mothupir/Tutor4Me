@@ -8,5 +8,8 @@ namespace Tutor4MeApi.Data
         int DeleteModule(int moduleId);
         Module GetModule(int moduleId);
         List<Module> GetAllModules();
+        List<Module> GetModuleByNameSubstring(String searchTerm);
+
+        List<Module> GetModuleByKeywordDesc(String searchTerm);
     }
 }
