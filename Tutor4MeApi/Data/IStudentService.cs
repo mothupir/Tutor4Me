@@ -9,10 +9,6 @@ namespace Tutor4MeApi.Data
         //get modules offered by tutor
         //get tutor information
 
-        List<Tutor> getAllTutorsByModule(int moduleId);
-        List<Tutor> getAllTutors();
-        List<Module> getOfferedModulesByTutor(int tutorId);
-        Tutor? getTutorInformation(int tutorId);
         int CreateStudent(Student student);
         Student? GetStudent(int id);
         int UpdateStudent(Student student);
