@@ -96,5 +96,18 @@ namespace Tutor4MeApi.Data
             return StatusCode(500, "Timeslot could not be deleted");
 
         }
+
+        [HttpGet("get/bookings{tutorID}")]
+        public IActionResult getBookedTimeslotsTutor(int tutorID)
+        {
+            var results = timeslotService.GetBookedTimeslotsTutor(tutorID);
+            return Ok(results);
+        }
+        [HttpGet("get/booked{studentID}")]
+        public IActionResult  getBookingsStudent(int studentID)
+        {
+            var results = timeslotService.GetBookedTimeslotsTutor(studentID);
+            return Ok(results);
+        }
     }
 }

@@ -9,6 +9,8 @@ namespace Tutor4MeApi.Data
         int CancelBooking(int timeslotID);
         dynamic getTimeslots(int TutorID);
         int deleteTimeslot(int timeslotID);
+        dynamic GetBookedTimeslotsTutor(int TutorID);
+        dynamic getBookingsStudent(int studentID);
     }
 
 }
