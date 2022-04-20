@@ -41,17 +41,5 @@ namespace Tutor4MeApi.Data
             return Ok(result);
         }
 
-        [HttpGet("rating/getaveragebymodule/{tutorId}/{moduleId}")]
-        public IActionResult GetTutorAverageRatingByModule(int tutorId, int moduleId)
-        {
-            var result = _service.GetTutorAverageRatingByModule(tutorId, moduleId);
-
-            if(result == null)
-            {
-                return NotFound($"Tutor with TutorId: {tutorId} was not found!!!");
-            }
-
-            return Ok(result);
-        }
     }
 }

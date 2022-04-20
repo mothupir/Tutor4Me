@@ -20,7 +20,7 @@ namespace Tutor4MeApi.Data
                 return 0;
             }
 
-            newRating = new Rating()
+            var newRating = new Rating()
             {
                 RatingId = 0,
                 TutorId = tutorId,
@@ -54,11 +54,6 @@ namespace Tutor4MeApi.Data
 
             return averageRating;
             
-        }
-
-        public int GetTutorAverageRatingByModule(int tutorId, int moduleId){
-            //Can't be done with current DB structure
-            return 0;
         }
     
     }
