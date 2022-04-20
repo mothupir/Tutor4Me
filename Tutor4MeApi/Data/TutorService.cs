@@ -45,18 +45,18 @@ namespace Tutor4MeApi.Data
             return 1;
         }
 
-        public int CreateTutor(Tutor tutor)
+        public Tutor? CreateTutor(Tutor tutor)
         {
             var checkTutor = _context.Tutors.Where(t => t.EmailAddress.ToLower() == tutor.EmailAddress.ToLower()).FirstOrDefault();
 
             if (checkTutor != null)
             {
-                return 0;
+                return null;
             }
 
             _context.Tutors.Add(tutor);
             _context.SaveChanges();
-            return 1;
+            return _context.Tutors.Where(t => t.EmailAddress == tutor.EmailAddress).FirstOrDefault();
         }
 
         public Dictionary<string, string> GetTutor(int id)
@@ -158,7 +158,6 @@ namespace Tutor4MeApi.Data
 
         }
 
-
         public List<Tutor> getAllTutorsByModule(int moduleId)
         {
             List<Tutor> tutors = new List<Tutor>();
@@ -169,6 +168,7 @@ namespace Tutor4MeApi.Data
             }
             return tutors;
         }
+
         public List<Tutor> getAllTutors()
         {
             return _context.Tutors.ToList();

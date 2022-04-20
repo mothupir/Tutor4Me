@@ -6,7 +6,7 @@ namespace Tutor4MeApi.Data
     {
         int AddTutoredModule(int tutorId, int moduleId);
         int RemoveTutoredModule(int tutorId, int moduleId);
-        int CreateTutor(Tutor tutor);
+        Tutor? CreateTutor(Tutor tutor);
         Dictionary<string, string> GetTutor(int id);
         int UpdateTutor(Tutor tutor);
         int DeleteTutor(int id);

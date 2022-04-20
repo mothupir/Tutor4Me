@@ -12,17 +12,18 @@ namespace Tutor4MeApi.Data
 
 
 
-        public int CreateStudent(Student student)
+        public Student? CreateStudent(Student student)
         {
             var checkStudent = _context.Students.Where(s => s.EmailAddress.ToLower() == student.EmailAddress.ToLower()).FirstOrDefault();
             if (checkStudent != null)
             {
-                return 0;
+                return null;
             }
 
             _context.Students.Add(student);
             _context.SaveChanges();
-            return 1;
+
+            return _context.Students.Where(s => s.EmailAddress == student.EmailAddress).FirstOrDefault();
         }
 
         public Student? GetStudent(int id)

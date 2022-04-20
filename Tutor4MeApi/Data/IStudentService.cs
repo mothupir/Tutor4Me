@@ -9,7 +9,7 @@ namespace Tutor4MeApi.Data
         //get modules offered by tutor
         //get tutor information
 
-        int CreateStudent(Student student);
+        Student? CreateStudent(Student student);
         Student? GetStudent(int id);
         int UpdateStudent(Student student);
         int DeleteStudent(int id);
