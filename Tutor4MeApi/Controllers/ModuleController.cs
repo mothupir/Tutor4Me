@@ -42,7 +42,7 @@ namespace Tutor4MeApi.Data
             }
         }
 
-        [HttpGet("delete/{moduleId}")]
+        [HttpDelete("delete/{moduleId}")]
         public IActionResult DeleteModule(int moduleId)
         {
             var result = _service.DeleteModule(moduleId);
