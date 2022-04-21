@@ -19,7 +19,7 @@ namespace Tutor4MeApi.Data
         [HttpGet("get/modules/{tutorId}")]
         public IActionResult GetOfferedModulesByTutor(int tutorId)
         {
-            var result = _service.getOfferedModulesByTutor(tutorId);
+            var result = _service.GetOfferedModulesByTutor(tutorId);
             if (result.Count == 0)
             {
                 return NotFound($"No module offered by tutor with tutorId:{tutorId} was found!!!");

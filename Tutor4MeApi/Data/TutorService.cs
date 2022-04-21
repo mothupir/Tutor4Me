@@ -71,7 +71,7 @@ namespace Tutor4MeApi.Data
 
             var rating = GetTutorAverageRating(tutor.TutordId);
 
-
+            map.Add("TutorId", tutor.TutordId.ToString());
             map.Add("Name", tutor.FirstName + " " + tutor.LastName);
             map.Add("Email", tutor.EmailAddress);
             map.Add("Number", tutor.PhoneNumber);
@@ -145,7 +145,9 @@ namespace Tutor4MeApi.Data
             }
 
             List<Rating> tutorRatings = _context.Ratings.Where(r => r.TutorId == tutorId).ToList();
-
+            if(tutorRatings.Count==0){
+                return 0;
+            }
             var totalScore = 0;
             foreach (Rating r in tutorRatings)
             {
@@ -158,23 +160,55 @@ namespace Tutor4MeApi.Data
 
         }
 
-        public List<Tutor> getAllTutorsByModule(int moduleId)
+        public List<Tutor> GetAllTutorsByModule(int moduleId)
         {
             List<Tutor> tutors = new List<Tutor>();
             List<TutoredModule> tutoredModules = _context.TutoredModules.Where(tm => tm.ModuleId == moduleId).ToList();
             foreach (TutoredModule tm in tutoredModules)
             {
-                tutors.Add(this.getTutorInformation(tm.TutorId));
+                tutors.Add(this.GetTutorInformation(tm.TutorId));
             }
             return tutors;
         }
 
-        public List<Tutor> getAllTutors()
+        public List<Dictionary<string,string>> GetAllTutors(string sortby)
         {
-            return _context.Tutors.ToList();
+            List<Tutor>tutors = _context.Tutors.ToList();
+             if(sortby.ToLower()=="name"){
+                 return SortTutorsByName(tutors);
+             }
+             else if(sortby.ToLower()=="ratings"){
+                 return SortTutorsByRatings(tutors);
+             }
+             else{
+                var tutorList = new List<Dictionary<string,string>>();
+                   foreach(Tutor t in tutors){
+                        var tutorInfo = GetTutor(t.TutordId);
+                        tutorList.Add(tutorInfo);
+                   }
+                return tutorList;
+            }
         }
-
-        public Tutor? getTutorInformation(int tutorId)
+        public List<Dictionary<string,string>> SortTutorsByName(List<Tutor>tutors){
+            //Sort((x, y) => x.age.CompareTo(y.age));
+            tutors.Sort((t1,t2) => (t1.FirstName+t1.LastName).CompareTo(t2.FirstName+t2.LastName));
+            var tutorList = new List<Dictionary<string,string>>();
+            foreach(Tutor t in tutors){
+                var tutorInfo = GetTutor(t.TutordId);
+                tutorList.Add(tutorInfo);
+            }
+            return tutorList;
+        }
+        public List<Dictionary<string,string>> SortTutorsByRatings(List<Tutor>tutors){
+            tutors.Sort((t2,t1) => GetTutorAverageRating(t1.TutordId).CompareTo(GetTutorAverageRating(t2.TutordId)));
+            var tutorList = new List<Dictionary<string,string>>();
+            foreach(Tutor t in tutors){
+                var tutorInfo = GetTutor(t.TutordId);
+                tutorList.Add(tutorInfo);
+            }
+            return tutorList;
+        }
+        public Tutor? GetTutorInformation(int tutorId)
         {
             return _context.Tutors.Find(tutorId);
         }

@@ -36,7 +36,7 @@ namespace Tutor4MeApi.Data
         int ITimeslotService.BookTimeslot(int studentID, int moduleID, int timeslotID)
         {
             var timeslot = _context.Timeslots.Where(t => t.TimeslotId == timeslotID).FirstOrDefault();
-            if (timeslot == null)
+            if (timeslot == null || DateTime.Compare(DateTime.Now, timeslot.Date) >0)
             {
                 return 404;
             }
@@ -121,6 +121,12 @@ namespace Tutor4MeApi.Data
             dynamic bookedTimeslots = _context.Timeslots.Where(t =>  t.StudentId == studentID).ToList();
             return bookedTimeslots;
 
+        }
+
+        dynamic ITimeslotService.GetTutorAvailableTimeslots(int tutorID)
+        {
+            dynamic bookedTimeslots = _context.Timeslots.Where(t => t.TutorId == tutorID && t.StudentId == 0 && t.ModuleId == 0).ToList();
+            return bookedTimeslots;
         }
     }
 }

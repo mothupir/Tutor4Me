@@ -34,8 +34,8 @@ namespace Tutor4MeApi.Data
 
         }
 
-        [HttpPut("book/{studentID}/{moduleID}")]
-        public IActionResult BookTimeslot(int studentID, int moduleID, [FromBody] int timeslotID)
+        [HttpPut("book/{studentID}/{moduleID}/{timeslotID}")]
+        public IActionResult BookTimeslot(int studentID, int moduleID, int timeslotID)
         {
             var results = timeslotService.BookTimeslot(studentID, moduleID, timeslotID);
             if (results == 200)
@@ -74,14 +74,14 @@ namespace Tutor4MeApi.Data
 
         }
 
-        [HttpGet("get/timeslots{tutorID}")]
+        [HttpGet("get/timeslots/{tutorID}")]
         public IActionResult getTimeslots (int tutorID)
         {
             var results = timeslotService.getTimeslots(tutorID);
             return Ok(results);
 
         }
-        [HttpPut("deleteTimeslot{timeslotID}")]
+        [HttpPut("deleteTimeslot/{timeslotID}")]
         public  IActionResult deleteTimeslot (int timeslotID)
         {
             var results = timeslotService.deleteTimeslot(timeslotID);
@@ -97,17 +97,26 @@ namespace Tutor4MeApi.Data
 
         }
 
-        [HttpGet("get/bookings{tutorID}")]
+        [HttpGet("get/bookings/{tutorID}")]
         public IActionResult getBookedTimeslotsTutor(int tutorID)
         {
             var results = timeslotService.GetBookedTimeslotsTutor(tutorID);
             return Ok(results);
         }
-        [HttpGet("get/booked{studentID}")]
+        [HttpGet("get/booked/{studentID}")]
         public IActionResult  getBookingsStudent(int studentID)
         {
-            var results = timeslotService.GetBookedTimeslotsTutor(studentID);
+            var results = timeslotService.getBookingsStudent(studentID);
             return Ok(results);
+        }
+
+        [HttpGet("get/bookings/available/{tutorID}")]
+        public IActionResult GetTutorAvailableTimeslots(int tutorID)
+        {
+            var availableTimeslots = timeslotService.GetTutorAvailableTimeslots(tutorID);
+            if (availableTimeslots.Count==0)
+                return NotFound("No available timeslots for this tutor");
+            return Ok(availableTimeslots);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Tutor4MeApi.Data
 {
     public interface IModuleService
     {
-        List<Module> getOfferedModulesByTutor(int tutorId);
+        List<Module> GetOfferedModulesByTutor(int tutorId);
         int CreateModule(Module module);
         int DeleteModule(int moduleId);
         Module GetModule(int moduleId);
